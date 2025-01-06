@@ -1,12 +1,30 @@
 const selectionButtons = document.querySelectorAll("[data-selection]")
+const SELECTIONS = [
+    {
+        name: "rock",
+        emoji: "✊",
+        beats: "scissors"
+    },
+    {
+        name: "paper",
+        emoji: "✋",
+        beats: "rock"
+    },
+    {
+        name: "scissors",
+        emoji: "✌️",
+        beats: "paper"
+    },
+]
 
 selectionButtons.forEach(selectionButton => {
     selectionButton.addEventListener("click" , e => {
-        selectionName = selectionButton.dataset.selection
-        makeSelection(selectionName)
+        const selectionName = selectionButton.dataset.selection
+        const selection = SELECTIONS.find(selection => selection.name === selectionName)
+        makeSelection(selection)
     })
 })
 
-function makeSelection(selectionName){
-    console.log(selectionName)
+function makeSelection(selection){
+    console.log(selection)
 }
