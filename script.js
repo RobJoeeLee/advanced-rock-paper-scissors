@@ -1,5 +1,7 @@
 const selectionButtons = document.querySelectorAll("[data-selection]")
 const finalColumn = document.querySelector("[data-final-column]")
+const computerScoreSpan = document.querySelector("[data-computer-score]")
+const yourScoreSpan = document.querySelector("[data-your-score]")
 const SELECTIONS = [
     {
         name: "rock",
@@ -30,10 +32,12 @@ function makeSelection(selection){
     const computerSelection = randomSelection()
     const youWinner = isWinner(selection, computerSelection)
     const computerWinner = isWinner(computerSelection, selection)
-    console.log(computerSelection)
 
     addSelectionResult(computerSelection, computerWinner)
     addSelectionResult(selection, youWinner)
+
+    if (youWinner) incrementScore(yourScoreSpan)
+    if (computerWinner) incrementScore(computerScoreSpan)
 }
 
 function isWinner(selection,opponentSelection){
@@ -46,6 +50,10 @@ function addSelectionResult(selection, winner){
     div.classList.add("result-selection")
     if (winner) div.classList.add("winner")
     finalColumn.after(div)
+}
+
+function incrementScore(scoreSpan){
+    scoreSpan.innerText = parseInt(scoreSpan.innerText) + 1
 }
 
 function randomSelection(){
